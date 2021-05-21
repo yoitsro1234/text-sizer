@@ -1,3 +1,9 @@
+noseX = 0;
+noseY = 0;
+rwX = 0;
+lwX = 0;
+difference = 0;
+
 function setup(){
     video = createCapture(VIDEO);
     video.size(500, 500);
@@ -9,16 +15,30 @@ function setup(){
     poseNet.on("pose", gotPoses);
 }
 
-function draw(){
-    background ("#A9B8CA");
-}
 
 function modelLoaded(){
-    console.log("yep done. what second page?");
+    console.log("modEl loadEd");
 }
 
 function gotPoses(results){
     if(results.length > 0){
-        console.log(results, "sub 2 yoitsro1234 & yoitsro5678");
+        console.log(results, "SUBSCRIBE TO YOITSRO1234");
+        noseX = results[0].pose.nose.x;
+        noseY = results[0].pose.nose.y;
+        console.log("nose x ="+ noseX + "nose y = " + noseY);
+        lwX = results[0].pose.leftWrist.x;
+        rwX = results[0].pose.rightWrist.x;
+        difference = floor(lwX - rwX);
+        console.log(rwX + " "+ lwX + " "+ difference+ "SUBSCRIBE TO YOITSRO");
     }
+}
+
+
+function draw(){
+    background ('969A97');
+    fill("cyan");
+    stroke("blue");
+    text(RohanShah, 100, 200);
+    textSize(difference);
+    document.getElementById("side").innerHTML = "Width and Height will be: "+difference+" pixels.";
 }
